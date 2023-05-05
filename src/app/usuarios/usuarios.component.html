@@ -1,0 +1,128 @@
+<br>
+<br>
+<br>
+<div class="container">
+  <span class="titulo">API de Usuários</span>
+  <hr class="mb-4">
+
+  <div class="row">
+    <div class="col-lg-8 col-md-6 col-sm-12">
+      <button type="button" class="btn btn-success ms-2" data-bs-toggle="modal"
+        data-bs-target="#modal">Adicionar</button>
+    </div>
+
+    <div class="col-lg-4 col-md-6 col-sm-12">
+      <form class="d-flex" role="search">
+        <input (input)="carregar($event.target.value)" (change)="this.textoBuscar = $event.target.value" class="form-control me-2" type="search" (input)="this.textoBuscar = $event.target.value"
+          placeholder="Search" aria-label="Search">
+        <a (click)="carregar(this.textoBuscar)" class="btn btn-outline-info" type="submit"><i class="fas fa-search"></i></a>
+      </form>
+    </div>
+  </div>
+
+  <br>
+
+  <table class="table table-striped ms-2">
+    <thead>
+      <tr>
+        <td scope="col"><b>Nome</b></td>
+        <td scope="col"><b>Usuário</b></td>
+        <td scope="col"><b>Senha</b></td>
+        <td scope="col"><b>Ações</b></td>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let dado of lista">
+        <td>{{dado.nome}}</td>
+        <td>{{dado.usuario}}</td>
+        <td>{{dado.senha}}</td>
+        <td>
+          <a (click)="dadosEditar(dado.nome, dado.usuario, dado.senha, dado.id)" data-bs-toggle="modal"
+            data-bs-target="#modal" title="Editar registro"><i class="far fa-edit me-2 text-info"></i></a>
+          <a (click)="excluir(dado.id)" title="Excluir registro"><i class="far fa-trash-alt text-danger"></i></a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>
+
+
+
+
+
+<!-- CONTEUDO DA JANELA MODAL - INSERIR -->
+<div class="modal fade" id="modal" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{title}}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+
+      <div class="modal-body">
+
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Nome</label>
+          <input type="text" class="form-control" (input)="this.nome = $event.target.value" value="{{nome}}"
+            aria-describedby="emailHelp" required>
+        </div>
+
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Email</label>
+          <input type="email" class="form-control" (input)="this.usuario = $event.target.value" value="{{this.usuario}}"
+            aria-describedby="emailHelp" required>
+        </div>
+
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">Senha</label>
+          <input type="text" class="form-control" (input)="this.senha = $event.target.value" value="{{this.senha}}"
+            required>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button *ngIf="id === ''" type="button" class="btn btn-primary" (click)="cadastrar()">Salvar</button>
+        <button *ngIf="id > 0" type="button" class="btn btn-primary" (click)="editar()">Salvar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- <div class="modal fade" id="modalEditar" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Editar Usuário</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+
+      <div class="modal-body">
+
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Nome</label>
+          <input type="text" class="form-control" (input)="this.nome = $event.target.value" value="{{nome}}" aria-describedby="emailHelp" required>
+        </div>
+
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Email</label>
+          <input type="email" class="form-control" (input)="this.usuario = $event.target.value" value="{{usuario}}"  aria-describedby="emailHelp" required>
+        </div>
+
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">Senha</label>
+          <input type="text" class="form-control"(input)="this.senha = $event.target.value" value="{{senha}}"  required>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="editar()">Salvar</button>
+      </div>
+    </div>
+  </div>
+</div> -->
